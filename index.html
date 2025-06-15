@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Father's Day</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .card-container {
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        
+        .card {
+            width: 700px;
+            height: 450px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+        }
+        
+        .card.opened {
+            transform: rotateY(-180deg);
+            animation: cardOpen 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes cardOpen {
+            0% { transform: rotateY(0deg) scale(1); }
+            30% { transform: rotateY(-20deg) scale(1.02); }
+            60% { transform: rotateY(-160deg) scale(1.05); }
+            100% { transform: rotateY(-180deg) scale(1); }
+        }
+        
+        .card-front, .card-inside {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+        
+        .card-front {
+            background: linear-gradient(145deg, #2c3e50, #34495e);
+            color: white;
+            border: 3px solid #f39c12;
+        }
+        
+        .card-inside {
+            background: linear-gradient(145deg, #ecf0f1, #bdc3c7);
+            color: #2c3e50;
+            transform: rotateY(180deg);
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: stretch;
+            padding: 30px;
+        }
+        
+        .front-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5em;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #f39c12, #e74c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .front-subtitle {
+            font-size: 1.4em;
+            font-weight: 300;
+            text-align: center;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        .click-hint {
+            position: absolute;
+            bottom: 20px;
+            font-size: 0.9em;
+            opacity: 0.7;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+        
+        .left-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-right: 20px;
+        }
+        
+        .right-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-left: 20px;
+            border-left: 2px solid #bdc3c7;
+        }
+        
+        .photo-collage {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            width: 100%;
+            max-width: 280px;
+            margin-bottom: 20px;
+        }
+        
+        .photo {
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9em;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .photo:hover {
+            transform: translateY(-2px);
+        }
+        
+        .photo:nth-child(1) {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+        }
+        
+        .photo:nth-child(2) {
+            background: linear-gradient(45deg, #27ae60, #229954);
+        }
+        
+        .photo:nth-child(3) {
+            background: linear-gradient(45deg, #f39c12, #d68910);
+        }
+        
+        .photo:nth-child(4) {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+        }
+        
+        .photo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" opacity="0.3"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>') center/30px no-repeat;
+        }
+        
+        .collage-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5em;
+            text-align: center;
+            line-height: 1.5;
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .signature {
+            font-size: 1.1em;
+            font-style: italic;
+            color: #7f8c8d;
+            text-align: center;
+        }
+        
+        .heart {
+            color: #e74c3c;
+            font-size: 1.2em;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .decorative-element {
+            position: absolute;
+            font-size: 2em;
+            opacity: 0.1;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .decorative-element:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .decorative-element:nth-child(2) {
+            top: 20%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+        
+        .decorative-element:nth-child(3) {
+            bottom: 15%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container" onclick="openCard()">
+        <div class="card" id="card">
+            <div class="decorative-element">⚓</div>
+            <div class="decorative-element">🏆</div>
+            <div class="decorative-element">⭐</div>
+            
+            <div class="card-front">
+                <h1 class="front-title">Happy Father's Day!</h1>
+                <p class="front-subtitle">To the World's Greatest Dad</p>
+                <div class="click-hint">Click to open your card! 💝</div>
+            </div>
+            
+            <div class="card-inside">
+                <div class="left-panel">
+                    <h3 class="collage-title">Our Best Memories</h3>
+                    <div class="photo-collage">
+                        <div class="photo">Family Vacation</div>
+                        <div class="photo">Fishing Trip</div>
+                        <div class="photo">Game Night</div>
+                        <div class="photo">Graduation Day</div>
+                    </div>
+                </div>
+                
+                <div class="right-panel">
+                    <div class="message">
+                        Dad, you've been my hero, my guide, and my biggest supporter. 
+                        Thank you for all the love, wisdom, and dad jokes that make 
+                        life brighter every day. You mean the world to me! 
+                        <span class="heart">❤️</span>
+                    </div>
+                    
+                    <div class="signature">
+                        With all my love,<br>
+                        Your child
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isOpened = false;
+        
+        function openCard() {
+            const card = document.getElementById('card');
+            if (!isOpened) {
+                card.classList.add('opened');
+                isOpened = true;
+            } else {
+                card.classList.remove('opened');
+                isOpened = false;
+            }
+        }
+        
+        // Add some sparkle effects
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.innerHTML = '✨';
+            sparkle.style.position = 'fixed';
+            sparkle.style.left = Math.random() * window.innerWidth + 'px';
+            sparkle.style.top = Math.random() * window.innerHeight + 'px';
+            sparkle.style.fontSize = Math.random() * 20 + 10 + 'px';
+            sparkle.style.opacity = '0.7';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.zIndex = '1000';
+            sparkle.style.animation = 'sparkleFloat 3s ease-out forwards';
+            
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 3000);
+        }
+        
+        // Add sparkle animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes sparkleFloat {
+                0% {
+                    transform: translateY(0px) rotate(0deg);
+                    opacity: 0.7;
+                }
+                100% {
+                    transform: translateY(-100px) rotate(180deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Create sparkles periodically
+        setInterval(createSparkle, 2000);
+    </script>
+</body>
+</html>
